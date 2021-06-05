@@ -1,0 +1,9 @@
+<div class="container mt-5" *ngIf="yesRegister">
+  <app-registration (registerEvent)="registerEvent($event)"></app-registration>
+</div>
+<div class="container mt-5" *ngIf="!yesRegister">
+  <app-verifiy
+    (registerEvent)="registerEvent($event)"
+    [userDetails]="userDetails"
+  ></app-verifiy>
+</div>

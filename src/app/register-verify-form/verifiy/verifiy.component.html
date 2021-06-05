@@ -1,0 +1,57 @@
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Verification uniqueCode</h1>
+    <form [formGroup]="verifiyFormGroup">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Enter the 6 digit uniqueCode</mat-label>
+        <input matInput formControlName="uniqueCode" />
+        <mat-icon matSuffix class="secondary-text">verified_user</mat-icon>
+        <mat-error>
+          <small
+            *ngIf="verifiyFormGroup.controls['uniqueCode'].errors?.required"
+          >
+            Unique Code is required</small
+          >
+          <small
+            *ngIf="verifiyFormGroup.controls['uniqueCode'].errors?.minlength"
+          >
+            Unique Code must be minimum of 6 characters</small
+          >
+          <small
+            *ngIf="verifiyFormGroup.controls['uniqueCode'].errors?.maxlength"
+          >
+            Unique Code can be maximum of 6 characters</small
+          >
+        </mat-error>
+      </mat-form-field>
+      <div class="row">
+        <p class="otp-expiry ml-4 mb-0">
+          OTP Expires in 60s - {{ counterSec | timerMinutes }}
+          <!-- <span id="timer" class="timer">00:<span id="time">60</span></span> -->
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button
+            mat-raised-button
+            color="primary"
+            class="w-100 mt-3"
+            [disabled]="verifiyFormGroup.invalid"
+            (click)="onVerify()"
+          >
+            Verify Unique Code
+          </button>
+          <button
+            *ngIf="showResend"
+            mat-raised-button
+            color="warn"
+            class="w-100 mt-3"
+            (click)="resend()"
+          >
+            Re-Send Unique Code
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
